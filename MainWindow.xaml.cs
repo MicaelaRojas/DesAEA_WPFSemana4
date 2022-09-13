@@ -24,7 +24,7 @@ namespace WPFSem4
     /// </summary>
     public partial class MainWindow : Window
     {
-        SqlConnection connection = new SqlConnection("Data Source=ROGSTRIXG173\SQLEXPRESS Initial Catalog=School");
+        SqlConnection connection = new SqlConnection(@"Data Source=ROGSTRIXG173\SQLEXPRESS;Initial Catalog=School;Integrated Security=True");
 
         public MainWindow()
         {
@@ -47,19 +47,20 @@ namespace WPFSem4
 
             //parameter1.Value = txtLastName.Text. Trim();
 
-            parameter1.Value = ""; 
-            parameter1.ParameterName = "@LastName";
-            SqlParameter parameter2 = new SqlParameter();
+            //parameter1.Value = "";
+            //parameter1.ParameterName = "@LastName";
 
+
+            SqlParameter parameter2 = new SqlParameter();
             parameter2.SqlDbType = SqlDbType.VarChar;
             parameter2.Size = 50;
 
             //parameter2.Value = txtFirstName.Text. Trim();
 
-            parameter2.Value = "";
+            parameter2.Value = "ia";
 
-            parameter2.ParameterName = "@FistName";
-            command.Parameters.Add(parameter1); 
+            parameter2.ParameterName = "@FirstName";
+           
             command.Parameters.Add(parameter2);
            
             SqlDataReader dataReader = command.ExecuteReader();
@@ -69,7 +70,7 @@ namespace WPFSem4
             {
                 people.Add(new Person
                 {
-                    PersonId = dataReader["PeopleId"].ToString(),
+                    PersonID = dataReader["PersonID"].ToString(),
                     LastName =  dataReader["LastName"].ToString(), 
                     FirstName = dataReader["FirstName"].ToString(),
 
